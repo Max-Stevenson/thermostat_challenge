@@ -1,5 +1,12 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
+  if(window.localStorage.temperature === undefined) {
+    window.localStorage.temperature = thermostat.current_temp;
+    window.localStorage.power_saving_mode = thermostat.power_saving_mode;
+  } else {
+    thermostat.current_temp = Number(window.localStorage.temperature);
+    thermostat.power_saving_mode = window.localStorage.power_saving_mode;
+  }
   $('#temperature').text(thermostat.current_temp + "\xB0C");
   showName();
   updateOutdoorTemp($('#current-city').val());
